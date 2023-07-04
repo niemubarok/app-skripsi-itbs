@@ -1,0 +1,21 @@
+{
+    "settings": {
+        "nlp": {
+            "forceNER": true,
+            "spellCheck": true,
+            "languages": [
+                "id"
+            ],
+            "corpora": [
+                "corpus-id.json"
+            ]
+        }
+    },
+    "use": [
+        "Basic",
+        "LangId"
+    ],
+    "console": {
+        "debug": false
+    }
+}

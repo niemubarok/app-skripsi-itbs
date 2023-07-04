@@ -1,0 +1,377 @@
+{
+    "name": "Slot Filling Corpus",
+    "locale": "id-ID",
+    "data": [
+        {
+            "intent": "greeting.salam",
+            "utterances": [
+                "ass",
+                "salam",
+                "assalamualaikum",
+                "assalamu'alaikum",
+                "slm",
+                "assalam"
+            ],
+            "answers": [
+                {
+                    "answer": "Wa'alaikumussalam "
+                }
+            ]
+        },
+        {
+            "intent": "greeting.halo",
+            "utterances": [
+                "halo",
+                "hallo",
+                "hello",
+                "helo",
+                "hai",
+                "hi"
+            ],
+            "answers": [
+                {
+                    "answer": "Halo",
+                    "opts": "entities.option === halo"
+                }
+            ]
+        },
+        {
+            "intent": "greeting.pagi",
+            "utterances": [
+                "selamat pagi",
+                "slmt pagi",
+                "slamat pagi",
+                "selamat pgi",
+                "pagi mba",
+                "pagi mas",
+                "pagi pak",
+                "pagi bu",
+                "pagi ibu/bpk"
+            ]
+        },
+        {
+            "intent": "greeting.siang",
+            "utterances": [
+                "selamat siang"
+            ]
+        },
+        {
+            "intent": "greeting.sore",
+            "utterances": [
+                "selamat sore"
+            ]
+        },
+        {
+            "intent": "greeting.malam",
+            "utterances": [
+                "selamat malam"
+            ],
+            "answers": [
+                {
+                    "answer": "Selamat Malam"
+                }
+            ]
+        },
+        {
+            "intent": "thanks",
+            "utterances": [
+                "terima kasih",
+                "terimakasih",
+                "makasi",
+                "makasih",
+                "thx",
+                "thanks",
+                "thank you",
+                "maaci"
+            ]
+        },
+        {
+            "intent": "pendaftaran",
+            "utterances": [
+                "daftar",
+                "daftar kontrol"
+            ],
+            "slotFilling": {
+                "dokter": {
+                    "mandatory": true
+                },
+                "poliklinik": {
+                    "mandatory": true
+                },
+                "ktp": {
+                    "mandatory": true
+                }
+            },
+            "actions": [
+                {
+                    "name": "handlePendaftaranIntent",
+                    "parameters": [
+                        "id-ID",
+                        "param"
+                    ]
+                }
+            ]
+        },
+        {
+            "intent": "tanya jadwal",
+            "utterances": [
+                "jadwal @poliklinik",
+                "jadwal poli @poliklinik ada @dokter siapa saja?",
+                "@dokter praktek kapan saja?"
+            ],
+            "answers": [
+                "jadwal poliklinik apa yang bapak/ibu maskud"
+            ],
+            "slotFilling": {
+                "poliklinik": {
+                    "mandatory": true
+                },
+                "dokter": {
+                    "mandatory": false
+                }
+            },
+            "actions": [
+                {
+                    "name": "handleJanjiTemuIntent",
+                    "parameters": []
+                }
+            ]
+        },
+        {
+            "intent": "tanya pembayaran",
+            "utterances": [
+                "@pembayaran @umum @asuransi"
+            ],
+            "answers": [
+                "jadwal poliklinik apa yang bapak/ibu maskud"
+            ],
+            "slotFilling": {
+                "poliklinik": {
+                    "mandatory": true
+                },
+                "dokter": {
+                    "mandatory": false
+                }
+            },
+            "actions": [
+                {
+                    "name": "handleJanjiTemuIntent",
+                    "parameters": []
+                }
+            ]
+        }
+    ],
+    "entities": {
+        "poliklinik": {
+            "options": {
+                "poli dalam": [
+                    "internis",
+                    "internist",
+                    "penyakit dalam",
+                    "pnyakit dlm",
+                    "dalam"
+                ],
+                "poli obgyn": [
+                    "obgyn",
+                    "obgin",
+                    "kandungan"
+                ],
+                "poli anak": [
+                    "anak",
+                    "sp.An"
+                ],
+                "poli gigi": [
+                    "gigi"
+                ],
+                "poli paru": [
+                    "paru"
+                ],
+                "poli bedah umum": [
+                    "bedah umum"
+                  ],
+                  "poli fisioterapi": [
+                    "fisioterapi",
+                    "fisio",
+                    "fisiotherapi"
+                  ],
+                  "poli kulit": [
+                    "kulit",
+                    "spkk",
+                    "sp.kk",
+                    "kulit dan kelamin"
+                  ],
+                  "poli laktasi": [
+                    "laktasi"
+                  ],
+                  "poli mata": [
+                    "mata",
+                    "spm",
+                    "sp.mata",
+                    "sp.m"
+                  ],
+                  "poli orthopedi": [
+                    "orthopedi",
+                    "orthopaedi",
+                    "ortopedi"
+                  ],
+                  "poli rehab medik": [
+                    "rehab medik",
+                    "rehab medis",
+                    "rehabilitasi medis",
+                    "rehabilitasi medik"
+                  ],
+                  "poli syaraf": [
+                    "syaraf",
+                    "saraf"
+                  ],
+                  "poli jantung": [
+                    "jantung"
+                  ],
+                  "poli tht": [
+                    "THT"
+                  ]
+            }
+        },
+        "dokter": {
+            "options": {
+                "dr. Wulunggono": [
+                    "Wulunggono",
+                    "gono",
+                    "wulungono"
+                ],
+                "dr. Lina": [
+                    "lina",
+                    "dr. lina"
+                ],
+                "dr. Indra": [
+                    "indra",
+                    "indra, Spog"
+                ],
+                "dr. Qotrunnada": [
+                    "qotrunnada",
+                    "qotrunada",
+                    "qatrunnada",
+                    "qatrunada",
+                    "qotrun nada",
+                    "qatrun nada"
+                ]
+            }
+        },
+        "ktp": "/^(0[1-9]|[1-2][0-9]|3[0-1])(0[1-9]|1[0-2])(\\d{2})(\\d{6})(\\d)([13579]|[02468])$/",
+        "greeting": {
+            "options": {
+                "salam": [
+                    "salam",
+                    "ass",
+                    "assalamualaikum",
+                    "assalamu'alaikum",
+                    "slm",
+                    "assalam"
+                ],
+                "halo": [
+                    "halo",
+                    "hallo",
+                    "hello",
+                    "helo",
+                    "hai",
+                    "hi"
+                ],
+                "selamat pagi": [
+                    "selamat pagi",
+                    "slmt pagi",
+                    "slamat pgi"
+                ],
+                "selamat siang": [
+                    "selamat siang",
+                    "slamat siang",
+                    "slmt siang",
+                    "slamat siang"
+                ],
+                "selamat sore": [
+                    "selamat sore",
+                    "slamat sore",
+                    "slmt sore",
+                    "slamat sore"
+                ],
+                "selamat malam": [
+                    "selamat malam",
+                    "slmt malam",
+                    "slamat malam",
+                    "slamat mlm"
+                ]
+            }
+        },
+        "pembayaran": {
+            "options": {
+                "bpjs": [
+                    "bpjs"
+                ],
+                "umum": [
+                    "umum",
+                    "pribadi",
+                    "cash"
+                ],
+                "asuransi": [
+                    "asuransi",
+                    "admedika",
+                    "jasa marga"
+                ]
+            }
+        },
+        "waktu": {
+            "options": {
+                "pagi": [
+                    "pagi"
+                ],
+                "siang": [
+                    "siang"
+                ],
+                "sore": [
+                    "sore"
+                ],
+                "malam": [
+                    "malam"
+                ],
+                "hari ini": [
+                    "hari ini"
+                ],
+                "besok": [
+                    "besok"
+                ],
+                "lusa": [
+                    "lusa"
+                ],
+                "minggu": [
+                  "minggu",
+                  "ahad"
+              ],
+              "senin": [
+                  "senin"
+              ],
+              "selasa": [
+                  "selasa"
+              ],
+              "rabu": [
+                  "rabu"
+              ],
+              "kamis": [
+                  "kamis"
+              ],
+              "jumat": [
+                  "jumat",
+                  "jum'at"
+              ],
+              "sabtu": [
+                  "sabtu"
+              ]
+            }
+        },
+
+        "pasien": {
+            "options": {
+                "pasien baru": ["pasien baru"],
+                "pasien lama": ["pasien lama"]
+            }
+        }
+    }
+}

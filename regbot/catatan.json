@@ -1,0 +1,21 @@
+"📋 Pendaftaran Pasien Baru\n\nNo. Peserta: 7366363637373363\n\nNo. KTP: 6483863673733333\n\nNama Pasien: Hdjdhbdd\n\nTempat Lahir: Hdjdvd\n\nTanggal Lahir: 15 Juni 2023\n\nJenis Kelamin: L\n\nAlamat: Ddbdjd\n\nStatus Nikah: DUDHA\n\nAgama: ISLAM\n\nNama Ibu: Hdksbs\n\nGol. Darah: O\n\nCara Bayar: BPJS\n\nPoli Tujuan:  UMUM\n\nDokter Tujuan: dr. Armahida Kusriana\n\nTanggal Berobat: 15 Juni 2023"
+
+
+{
+  "noPeserta": "7366363637373363",
+  "noKtp": "6483863673733333",
+  "namaPasien": "Hdjdhbdd",
+  "tempatLahir": "Hdjdvd",
+  "tanggalLahir": "15 Juni 2023",
+  "jenisKelamin": "L",
+  "alamat": "Ddbdjd",
+  "statusNikah": "DUDHA",
+  "agama": "ISLAM",
+  "namaIbu": "Hdksbs",
+  "golDarah": "O",
+  "caraBayar": "BPJS",
+  "poliTujuan": "UMUM",
+  "dokterTujuan": "dr. Armahida Kusriana",
+  "tanggalBerobat": "15 Juni 2023",
+  "pasienBaru": true
+}
