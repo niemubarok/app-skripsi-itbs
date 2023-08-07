@@ -20,7 +20,6 @@ export default class StateService {
     console.log("state di handleStep:", state);
 
 
-
     switch (step) {
       case "tunggu formulir":
         const extractedData: any = await Helpers.extractDataDariPesan(userMessage as string);
@@ -35,11 +34,10 @@ export default class StateService {
 
         if ((userMessage as string).includes('📋')) {
           const dokter = await DokterService.getDokterByName(extractedData.dokterTujuan)
-          Helpers.setCache("data dokter", JSON.stringify(dokter), phoneNumber)
           const poli = await PoliService.getPoliByNama(extractedData.poliTujuan);
+          Helpers.setCache("data dokter", JSON.stringify(dokter), phoneNumber)
           Helpers.setCache("data poli", JSON.stringify(poli), phoneNumber)
           Helpers.setCache("tanggal periksa", extractedData.tanggalBerobat, phoneNumber);
-
 
           const pasienFromDB = await PasienService.getPatient({ ktp: extractedData.noKtp })
 

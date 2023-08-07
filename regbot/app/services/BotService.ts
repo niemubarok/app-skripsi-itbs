@@ -19,7 +19,7 @@ export default class BotService {
     const message = ctx.request.input("message");
     const phoneNumber = ctx.request.input("phoneNumber");
 
-    if (message == "#tes") {
+    if (message == "tes") {
       const qrcode = await Helpers.generateQRCode("2023/06/19/000002")
       return await ReplyService.replyMedia("tes qr", qrcode, 'media')
     }

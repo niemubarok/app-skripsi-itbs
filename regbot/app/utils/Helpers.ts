@@ -202,7 +202,7 @@ export default class Helpers {
       "jumat",
       "sabtu",
     ];
-    const dayIndex = daysOfWeek.indexOf(dayName.toLowerCase());
+    const dayIndex = daysOfWeek.indexOf(dayName?.toLowerCase());
 
     // If the day name is not valid, return null
     if (dayIndex === -1) {

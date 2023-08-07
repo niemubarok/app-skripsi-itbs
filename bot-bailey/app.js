@@ -65,10 +65,11 @@ bot.on("message", async (message) => {
     })
     .then(async (response) => {
       let res = await response.data;
-      const message = res?.message ? res.message : res;
+      const message = res?.message ? res.message : "";
       let type = res.type ? res.type : "";
       // let caption = await res.caption;
       console.log("type", type);
+      console.log(res);
       let source = res.source ? res.source : "";
 
       if (type == "media") {

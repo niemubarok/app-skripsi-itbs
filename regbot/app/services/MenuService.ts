@@ -32,7 +32,7 @@ export default class MenuService {
         case "2":
 
           Helpers.setCache("step", "tunggu formulir", phoneNumber);
-          return await ReplyService.reply("Silahkan klik link dibawah ini untuk mendaftar http://localhost:8080/registration", '', 'link')
+          return await ReplyService.reply("Silahkan klik link berikut untuk mendaftar http://localhost:8080/registration", '', 'link')
 
       }
     } else {

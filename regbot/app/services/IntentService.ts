@@ -40,18 +40,22 @@ export default class IntentService {
     console.log("intent di intentService", intent);
     let answers: any = [];
     const isGreeting = () => {
-      const regex = /^((pagi|siang|sore|malam)\b|\b(pagi|siang|sore|malam)\b)/i;
-      const match = nlpResult?.utterance.match(regex);
+      // const regex = /^((pagi|siang|sore|malam)\b|\b(pagi|siang|sore|malam)\b)/i;
+      const greetings = ["selamat pagi", "selamat siang", "selamat sore", "selamat malam"];
+      const match = greetings.some((greeting: string) => nlpResult?.utterance.includes(greeting));
       return match ? match[0] : null;
     }
     if (intents.length == 0 || nlpResult.utterance == 0 || !intent) {
       Helpers.setCache("state", "menu", phoneNumber);
       return MenuService.listMenu(phoneNumber)
     }
+
+    console.log("entitygreeting", entities[0]?.entity == "greeting");
+
     if (isGreeting()) {
       answers.push(EntityService.greeting(isGreeting()))
     } else if (entities[0]?.entity == "greeting") {
-      answers.push(EntityService.greeting(entities[0]?.option))
+      answers.push(EntityService.greeting(entities[0]?.option));
       // answers.push(greetingReplies);
     }
 
@@ -61,11 +65,11 @@ export default class IntentService {
       const patients = await PasienService.getPatient({ phone: phoneNumber });
 
       //jika pasien belum ada di database atau belum terdaftar
-      if (patients.length === 0) {
+      if (patients?.length === 0) {
         //Kembali ke menu utama
         Helpers.setCache("step", "tunggu formulir", phoneNumber);
-        answers.push(`Silahkan klik link dibawah ini untuk mendaftar\n${process.env.REG_URI}`)
-      } else if (patients.length > 0 && askAttempt == 0) {
+        answers.push(`Silahkan klik link berikut untuk mendaftar\n${process.env.REG_URI}`)
+      } else if (patients?.length > 0 && askAttempt == 0) {
         //cek apakah ada pasien terdaftar dengan nomor tersebut
         answers.push(
           `Sebelum melanjutkan, apakah ingin mendaftarkan salah satu pasien berikut?`
@@ -91,8 +95,10 @@ export default class IntentService {
       }
 
     } else if (intents.includes("tanya jadwal")) {
+      const replyJadwal = await JadwalService.handleJadwal(phoneNumber);
+      // return replyJadwal
 
-      return JadwalService.handleJadwal(phoneNumber);
+      answers.push(replyJadwal);
 
     } else if (nlpResult?.intent == "thanks") {
       answers.push("Terima kasih kembali 🙏")

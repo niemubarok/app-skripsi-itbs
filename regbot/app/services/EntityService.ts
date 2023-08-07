@@ -35,7 +35,7 @@ export default class GreetingService {
   }
 
   public static async checkEntities(phoneNumber: number) {
-    const requiredEntities = ["dokter", "poliklinik", "waktu"];
+    const requiredEntities = ["dokter", "poliklinik", "waktu", "hari"];
     const entities = await this.entities(phoneNumber)
     // console.log(entities);
 
@@ -47,42 +47,120 @@ export default class GreetingService {
       );
     }
   }
+
   public static greeting(entity: string) {
+    console.log("entity in greeting:", entity);
+
+
     switch (entity) {
       case 'salam':
         return "Wa'alaikumussalam";
+        break;
       case 'halo':
         return 'Halo';
+        break;
       case 'selamat pagi':
       case 'pagi':
         return 'Selamat Pagi';
+        break;
       case 'selamat siang':
       case 'siang':
         return 'Selamat Siang';
+        break;
       case 'selamat sore':
       case 'sore':
         return 'Selamat Sore';
+        break;
       case 'selamat malam':
       case 'malam':
         return 'Selamat Malam';
+        break;
       default:
         return '';
     }
   }
 
+  // public static greeting(entity: string, phoneNumber: number) {
+  //   console.log("entity in greeting:", entity);
+
+
+  //   switch (entity) {
+  //     case 'salam':
+  //       Helpers.setCache('greeting', "Wa'alaikumussalam", phoneNumber);
+  //       break;
+  //     case 'halo':
+  //       Helpers.setCache('greeting', 'Halo', phoneNumber);
+  //       break;
+  //     case 'selamat pagi':
+  //     case 'pagi':
+  //       Helpers.setCache('greeting', 'Selamat Pagi', phoneNumber);
+  //       break;
+  //     case 'selamat siang':
+  //     case 'siang':
+  //       Helpers.setCache('greeting', 'Selamat Siang', phoneNumber);
+  //       break;
+  //     case 'selamat sore':
+  //     case 'sore':
+  //       Helpers.setCache('greeting', 'Selamat Sore', phoneNumber);
+  //       break;
+  //     case 'selamat malam':
+  //     case 'malam':
+  //       Helpers.setCache('greeting', 'Selamat Malam', phoneNumber);
+  //       break;
+  //   }
+  // }
+
+  // public static async tanggalPeriksa(phoneNumber: number) {
+  //   const entities = await this.entities(phoneNumber);
+  //   const waktu = entities?.find((e: any) => e.entity === "waktu")?.option;
+  //   // const hari = entities?.find((e: any) => e.entity === "hari")?.option;
+
+  //   const allowedOptions = ["pagi", "siang", "sore", "malam", "hari ini", "besok", "lusa"];
+  //   const cachedTanggalPeriksa = await Helpers.getCache("tanggal periksa", phoneNumber);
+  //   if (cachedTanggalPeriksa) {
+  //     return cachedTanggalPeriksa;
+  //   }
+
+  //   const date = new Date();
+  //   if (allowedOptions.includes(waktu)) {
+  //     switch (waktu) {
+  //       case "besok":
+  //         date.setDate(date.getDate() + 1);
+  //         break;
+  //       case "lusa":
+  //         date.setDate(date.getDate() + 2);
+  //         break;
+  //     }
+  //     return Helpers.setDateString(date, phoneNumber);
+  //   } else if (waktu) {
+  //     const hariIni = new Date();
+  //     const hariIniStr = Helpers.setDateString(hariIni, phoneNumber);
+  //     const hariIniNum = new Date(hariIniStr).getDay();
+  //     const hariOption = Helpers.convertHariOption(waktu);
+  //     const diff = hariOption - hariIniNum;
+
+  //     if (diff < 0) {
+  //       date.setDate(date.getDate() + diff + 7);
+  //     } else if (diff === 0) {
+  //       return hariIniStr;
+  //     } else {
+  //       date.setDate(date.getDate() + diff);
+  //     }
+  //     return Helpers.setDateString(date, phoneNumber);
+  //   }
+  // }
+
   public static async tanggalPeriksa(phoneNumber: number) {
     const entities = await this.entities(phoneNumber);
     const waktu = entities?.find((e: any) => e.entity === "waktu")?.option;
-    const hari = entities?.find((e: any) => e.entity === "hari")?.option;
+    const hari = entities?.find((e: any) => e.entity === "waktu")?.option;
 
     const allowedOptions = ["pagi", "siang", "sore", "malam", "hari ini", "besok", "lusa"];
-    const cachedTanggalPeriksa = await Helpers.getCache("tanggal periksa", phoneNumber);
-    if (cachedTanggalPeriksa) {
-      return cachedTanggalPeriksa;
-    }
+    const hariOptions = ["akhad", "senin", "selasa", "rabu", "kamis", "jumat", "sabtu"];
+
 
     const date = new Date();
-    if (allowedOptions.includes(waktu) && !hari) {
+    if (allowedOptions.includes(waktu)) {
       switch (waktu) {
         case "besok":
           date.setDate(date.getDate() + 1);
@@ -92,12 +170,16 @@ export default class GreetingService {
           break;
       }
       return Helpers.setDateString(date, phoneNumber);
-    } else if (hari) {
+    } else if (hariOptions.includes(hari)) {
       const hariIni = new Date();
       const hariIniStr = Helpers.setDateString(hariIni, phoneNumber);
       const hariIniNum = new Date(hariIniStr).getDay();
       const hariOption = Helpers.convertHariOption(hari);
+      // return hariOption
+      console.log("hariOption", hariOption);
+
       const diff = hariOption - hariIniNum;
+
       if (diff < 0) {
         date.setDate(date.getDate() + diff + 7);
       } else if (diff === 0) {
@@ -105,7 +187,14 @@ export default class GreetingService {
       } else {
         date.setDate(date.getDate() + diff);
       }
-      return Helpers.setDateString(date, phoneNumber);
+
+      const cachedTanggalPeriksa = await Helpers.getCache("tanggal periksa", phoneNumber);
+      console.log("cachedTanggalPeriksa", cachedTanggalPeriksa != date);
+      // return date
+      if (cachedTanggalPeriksa != date) {
+        return Helpers.setDateString(date, phoneNumber);
+      }
+      return cachedTanggalPeriksa;
     }
   }
 

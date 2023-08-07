@@ -12,12 +12,12 @@ export default class StateService {
     const botState: any = await Helpers.getCache("state", phoneNumber);
     console.log("botState", botState);
 
-    const intents = {
+    const states = {
       menu: MenuService.handleMenu,
       booking: StepService.handleStep,
       "tanya jadwal": JadwalService.handleJadwal,
     };
-    const intentHandler = intents[botState] || IntentService.onIntent;
+    const intentHandler = states[botState] || IntentService.onIntent;
     return intentHandler(userMessage, phoneNumber);
 
     // switch (botState) {

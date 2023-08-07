@@ -18,6 +18,9 @@ export default class PasienService {
       throw new Error("At least one parameter must be provided");
     }
 
+    console.log(ktp);
+    console.log("phone", phone);
+
     try {
       const patient = await Pasien.query()
         .select({
@@ -33,7 +36,7 @@ export default class PasienService {
         })
         // .orWhere('no_rkm_medis', rm)
         .where("no_tlp", phone)
-        .orWhere('no_ktp', ktp)
+      // .orWhere('no_ktp', ktp)
       // .orWhere((query) => query.whereILike('nm_pasien', `%${name}%`).andWhere('no_ktp', ktp))
       return patient;
     } catch (err) {

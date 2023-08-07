@@ -21,7 +21,7 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
-    boot: ["store", "axios","select"],
+    boot: ["store", "axios", "select"],
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ["app.scss"],
@@ -45,8 +45,10 @@ module.exports = configure(function (ctx) {
       vueRouterMode: "history", // available values: 'hash', 'history'
       distDir: ctx.mode.spa ? "public" : null,
       // env: require("dotenv").config().parsed,
-      env:{
-        API_ENDPOINT: process.env.API_ENDPOINT ? process.env.API_ENDPOINT :"http://192.168.10.118:3333/api/",
+      env: {
+        API_ENDPOINT: process.env.API_ENDPOINT
+          ? process.env.API_ENDPOINT
+          : "http://localhost:3333/api/",
       },
 
       // transpile: false,
@@ -76,11 +78,11 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-devServer
     devServer: {
-      proxy:{
-        '/api': {
-          target: 'http://127.0.0.1:3333',
+      proxy: {
+        "/api": {
+          target: "http://127.0.0.1:3333",
           changeOrigin: true,
-        }
+        },
       },
       https: false,
       port: 8080,
